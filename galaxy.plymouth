@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=galaxy
+Description=Spinning galaxy with ubuntu logo
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/galaxy
+ScriptFile=/usr/share/plymouth/themes/galaxy/galaxy.script

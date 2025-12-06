@@ -1,0 +1,54 @@
+// Screen dimensions
+screen.w = Window.GetWidth(0);
+screen.h = Window.GetHeight(0);
+screen.half.w = screen.w / 2;
+screen.half.h = screen.h / 2;
+splash_scale = 0.75;   // Adjust size
+
+// Background
+Window.SetBackgroundTopColor(0,0,0);
+Window.SetBackgroundBottomColor(0,0,0);
+
+// Ubuntu logo
+ubuntu_img = Image("Ubuntu.png").Scale(85 * splash_scale, 85 * splash_scale);
+ubuntu = Sprite(ubuntu_img);
+ubuntu.SetX(screen.half.w + 1.7 * splash_scale - ubuntu_img.GetWidth()/2);
+ubuntu.SetY(screen.half.h + 0.5 * splash_scale - ubuntu_img.GetHeight()/2);
+ubuntu.SetZ(10);
+ubuntu_spin_speed = 0.1;
+
+// Load galaxy image
+galaxy_img = Image("galaxy.png").Scale(800 * splash_scale, 800 * splash_scale);
+galaxy = Sprite(galaxy_img);
+galaxy.SetX(screen.half.w - galaxy_img.GetWidth()/2);
+galaxy.SetY(screen.half.h - galaxy_img.GetHeight()/2);
+galaxy.SetZ(-10);
+galaxy_spin_speed = 0.01;
+
+// Rotation
+master_spin_speed = 0.5;
+time_counter = 0.0;
+
+// Function to update galaxy rotation
+fun update_galaxy() {
+	galaxy_rotated_img = galaxy_img.Rotate(time_counter * galaxy_spin_speed * master_spin_speed);
+	galaxy.SetImage(galaxy_rotated_img);
+}
+
+// Function to update Ubuntu rotation
+
+fun update_ubuntu() {
+	ubuntu_rotated_img = ubuntu_img.Rotate(0 - time_counter * ubuntu_spin_speed * master_spin_speed);
+	ubuntu.SetImage(ubuntu_rotated_img);
+}
+
+// Function to update rotation
+
+fun update_spin(){
+	update_ubuntu();
+	update_galaxy();
+	time_counter++;
+}
+
+// Set refresh callback
+Plymouth.SetRefreshFunction(update_spin);
